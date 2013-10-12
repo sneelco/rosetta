@@ -1,5 +1,6 @@
 module.exports = function(grunt) {
-  var server;
+  var server,
+      jasmine;
 
   grunt.initConfig({
     jshint: {
@@ -19,7 +20,8 @@ module.exports = function(grunt) {
           '*.js',
           'controllers/**/*.js',
           'models/**/*.js',
-          'routes/**/*.js'],
+          'routes/**/*.js',
+          'specs/**/*.js'],
         tasks: ['start'],
         options: {
           nospawn: true
@@ -38,7 +40,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
-  grunt.registerTask('start', function() {
+  grunt.registerTask('start', function () {
     if (server) server.kill();
     server = grunt.util.spawn({
       cmd: 'node',
@@ -48,6 +50,19 @@ module.exports = function(grunt) {
     });
     server.stdout.pipe(process.stdout);
     server.stderr.pipe(process.stderr);
+    grunt.task.run('jasmine');
+  });
+
+  grunt.registerTask('jasmine', function () {
+    if (jasmine) jasmine.kill();
+    jasmine = grunt.util.spawn({
+      cmd: 'jasmine-node',
+      args: ['--verbose', 'specs']
+    }, function() {
+      console.log('Running Jasmine');
+    });
+    jasmine.stdout.pipe(process.stdout);
+    jasmine.stderr.pipe(process.stderr);
     grunt.task.run('watch');
   });
 

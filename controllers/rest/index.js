@@ -1,7 +1,8 @@
 /*global module, require */
 
 var models = require('../../models'),
-  RestInterface;
+    mongoose = require('mongoose'),
+    RestInterface;
 
 function restException(res, msg, code, fields) {
   'use strict';
@@ -29,6 +30,7 @@ module.exports = RestInterface = {
 
     var fields,
         total,
+        valid = (model !== undefined && model.prototype && model.prototype instanceof mongoose.Model),
         found = false,
         sortObj = {},
         order,
@@ -38,6 +40,10 @@ module.exports = RestInterface = {
     sort = sort || '';
     fields = sort.split('|');
     total = fields.length;
+
+    if (!valid) {
+      throw('Invalid model passed');
+    }
 
     for (i = 0; i < total; i += 1) {
       field = fields[i];
@@ -50,6 +56,8 @@ module.exports = RestInterface = {
       if (model.schema.paths[field]) {
         found = true;
         sortObj[field] = order;
+      } else {
+        throw new Error('Invalid sort field');
       }
     }
 

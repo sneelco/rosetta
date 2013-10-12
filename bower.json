@@ -1,0 +1,13 @@
+{
+  "name": "package",
+  "version": "0.0.1",
+  "dependencies": {
+  	"angular": "1.2.0rc2",
+    "angular-route": "1.2.0rc2",
+    "angular-resource": "1.2.0rc2",
+    "jquery": "1.10.2",
+    "jquery-ui": "1.10.3",
+    "requirejs": "2.1.8"
+  }
+}
+

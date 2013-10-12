@@ -1,0 +1,12 @@
+<h3>Hello World from an AngularJS View</h3>
+<div class="error" ng-class="{hidden: !error.data.error}">{{error.data.error}}</div>
+<div class="info" ng-class="{hidden: !info}">{{info}}</div>
+<div>
+	<input type="input" ng-class="{field_error: error.data.fields.name}" ng-model="newRecord.name" placeholder="Name">
+	<button ng-click="addGreeting()">Add</button>
+</div>
+<div class="field_error_message" ng-class="{hidden: !error.data.fields.name}">{{error.data.fields.name}}</div>
+<h4 ng-repeat="record in records">
+		<span ng-click="updateGreeting(record)" class="edit">Hello {{record.name}} from an Angular REST Resource</span>
+		<span class="delete" ng-click="deleteGreeting(record)">྾</span>
+<h4>

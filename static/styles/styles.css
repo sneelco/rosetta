@@ -1,0 +1,62 @@
+body {
+    padding: 20px;
+}
+.hidden {
+    display: none;
+}
+.delete {
+    color: grey;
+    cursor: pointer;
+    transition: .3s;
+}
+.delete:hover {
+    color: black;
+}
+.edit {
+    color: black;
+    cursor: pointer;
+}
+.edit:before {
+    color: rgba(0,0,0,0);
+    content: '✎';
+    margin-left: -1em;
+    transition: .3s;
+}
+.edit:hover:before {
+    color: rgba(70,70,70,255);
+    content: '✎';
+    margin-left: -1em;
+}
+.error {
+    padding: 10px;
+    margin: 10px;
+    max-width: 400px;
+    min-width: 200px;
+    border-radius: 4px;
+    border: 1px solid rgb(238, 211, 215);
+    background-color: rgb(242, 222, 222);
+    color: rgb(185, 74, 72);
+    text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.5);
+    box-shadow: 0px 0px 3px rgba(242, 222, 222, .5);
+}
+.info {
+    padding: 10px;
+    margin: 10px;
+    max-width: 400px;
+    min-width: 200px;
+    border-radius: 4px;
+    border: 1px solid rgb(214, 233, 198);
+    color: rgb(70, 136, 71);
+    background-color: rgb(223, 240, 216);
+    text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.5);
+    box-shadow: 0px 0px 3px rgb(223, 240, 216, .5);
+}
+.field_error {
+    box-shadow: 0px 0px 3px rgb(185, 74, 72);
+    border: 1px solid rgb(238, 211, 215);
+}
+.field_error_message {
+    margin-left: 10px;
+    color: rgb(185, 74, 72);
+    text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.5);
+}

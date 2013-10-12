@@ -1,0 +1,17 @@
+{
+	"name": "package",
+	"version": "0.0.0",
+	"dependencies": {
+		"express":"",
+		"passport":"",
+		"passport-google":"",
+		"passport-local":"",
+    	"mongoose": "",
+		"ejs":""
+	},
+	"devDependencies": {
+		"grunt-contrib-watch": "~0.5.1",
+		"grunt": "~0.4.1",
+		"grunt-contrib-jshint": "~0.6.0"
+	}
+}

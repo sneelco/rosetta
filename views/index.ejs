@@ -5,10 +5,25 @@
         <title>Rosetta</title>
         <script data-main="scripts/main" src="vendor/requirejs/require.js"></script>
         <link href="styles/styles.css" rel="stylesheet">
+        <link href="vendor/angular-grid/ng-grid.css" rel="stylesheet">
     </head>
     <body ng-controller="MainCtl">
-        <h1>Welcome to Rosetta</h1>
-        <h2>{{greeting}}</h2>
-        <div ng-view></div>
+        <div class="header">Rosetta</div>
+        <div class="navigation">
+            <ul>
+                <li><a ui-sref="Overview">Overview</a></li>
+                <li><a ui-sref="Zones.List">Zones</a></li>
+                <li><a ui-sref="Views">Views</a></li>
+                <li><a ui-sref="Pools">Pools</a></li>
+                <li><a ui-sref="Resources">Resources</a></li>
+                <li><a ui-sref="Settings">Settings</a></li>
+            </ul>
+        </div>
+        <div class="trail">
+            <ul>
+                <li ng-repeat="section in path"><a ui-sref="{{section.path}}">{{section.name}}</a><div class="arrow_right"></div></li>
+            </ul>
+        </div>
+        <div ui-view></div>
     </body>
 </html>

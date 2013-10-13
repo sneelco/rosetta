@@ -10,5 +10,6 @@ define([
 ])
 */
 define([
-  'controllers/mainctl'
+  'controllers/mainctl',
+  'controllers/zonesctl'
 ]);

@@ -29,6 +29,22 @@ helloSchema.pre('save', function (next) {
   });
 });
 
+zoneSchema = mongoose.Schema({
+  name: {type: String, required: true},
+  views: [{
+    _id: {type: String, required: true},
+    ttl: {type: String, required: true},
+    mname: {type: String, required: true},
+    rname: {type: String, required: true},
+    serial: {type: String, required: true},
+    refresh: {type: String, required: true},
+    retry: {type: String, required: true},
+    expire: {type: String, required: true},
+    minimum: {type: String, required: true},
+  }],
+});
+
+models.zones = mongoose.model('zones', zoneSchema);
 models.hello = mongoose.model('Hello', helloSchema);
 
 module.exports = models;

@@ -2,60 +2,35 @@
 define(['app'], function (app) {
   'use strict';
 
-  app.controller('MainCtl', ['$scope', '$location', 'RestModel', function ($scope, $location, RestModel) {
-    var RestInterface;
-
+  app.controller('MainCtl', ['$scope', '$location', function ($scope, $location) {
+    $scope.path = [];
     $scope.location = $location;
-    $scope.greeting = 'Hello World from an AngularJS Controller';
 
-    RestInterface = RestModel.bind({version: 'v1', model: 'hello'});
+    $scope.$on('$locationChangeSuccess', function () {
+      var i,
+          url,
+          part,
+          total,
+          prev = '',
+          trail = [];
 
-    $scope.records = RestInterface.query();
-    $scope.newRecord = new RestInterface();
 
+      $scope.currentLocation = $location.$$path;
+      $scope.path = $location.$$path.split('/');
+      total = $scope.path.length;
 
-    $scope.deleteGreeting = function (record) {
-      record.$delete(
-        function () {
-          $scope.info = 'Greeting Deleted';
-          $scope.error = '';
-        }
-      );
-      $scope.records = RestInterface.query();
-    };
-
-    $scope.updateGreeting = function (record) {
-      var newName;
-
-      newName = prompt('Enter a new name', record.name);
-      if (newName) {
-        record.name = newName;
-        record.$update(
-          function () {
-            $scope.info = 'Greeting Saved';
-            $scope.error = '';
-          },
-          function (msg) {
-            $scope.info = '';
-            $scope.error = msg;
-          }
-        );
+      for (i = 0; i < total; i += 1) {
+        part = $scope.path[i];
+        url = (prev !== '') ? prev + '.' + part : part;
+        trail.push({'name': part, 'path': url});
+        prev = url;
       }
-    };
 
-    $scope.addGreeting = function () {
-      $scope.newRecord.$create(
-        function () {
-          $scope.info = 'Greeting Added';
-          $scope.error = '';
-          $scope.records = RestInterface.query();
-          $scope.newRecord = new RestInterface();
-        },
-        function (msg) {
-          $scope.info = '';
-          $scope.error = msg;
-        }
-      );
-    };
+      trail[0].path = 'Overview';
+      trail[0].name = '⌂';
+
+      $scope.path = trail;
+    });
+
   }]);
 });

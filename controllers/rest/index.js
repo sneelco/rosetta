@@ -37,8 +37,8 @@ module.exports = RestInterface = {
         field,
         i;
 
-    sort = sort || '';
-    fields = sort.split('|');
+    sort = sort || undefined;
+    fields = (sort !== undefined) ? sort.split('|') : [];
     total = fields.length;
 
     if (!valid) {
@@ -57,7 +57,7 @@ module.exports = RestInterface = {
         found = true;
         sortObj[field] = order;
       } else {
-        throw new Error('Invalid sort field');
+        throw new Error('Invalid sort field: ' + field);
       }
     }
 

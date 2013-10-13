@@ -4,6 +4,11 @@ var Models = require('../../../models'),
 
 describe('Rest.parseSort function', function () {
   'use strict';
+  it('should return undefined if no sort passed', function () {
+    var sort = Rest.parseSort(undefined, Models.hello);
+    expect(sort).toEqual(undefined);
+  });
+
   it('should return an Object with a valid field and model', function () {
     var sort = Rest.parseSort('name', Models.hello);
     expect(sort).toEqual({name: 1});
@@ -34,4 +39,25 @@ describe('Rest.parseRange function', function () {
     var options = Rest.parseRange();
     expect(options).toEqual({limit: null, skip: 0});
   });
+});
+
+describe('Rest.parseFilter function', function () {
+});
+
+describe('Rest.get_model function', function () {
+});
+
+describe('Rest.get_record function', function () {
+});
+
+describe('Rest.add_record function', function () {
+});
+
+describe('Rest.update_record function', function () {
+});
+
+describe('Rest.delete_record function', function () {
+});
+
+describe('Rest.requireJson function', function () {
 });

@@ -16,12 +16,13 @@ your internal dns on your bind servers as well your external dns on DynDNS.
 ------------
 * NodeJS
 * MongoDB
-* Bower (to install client side libraries)
+* Bower (easier installation of client side libraries)
 * Grunt (for easier local dev)
+* Jasmine-Node (for unit testing)
 
 ### Installation
 ------------
-* git clone 
+* git clone https://github.com/truesneel/rosetta.git
 * cd rosetta
 * bower install
 * npm install

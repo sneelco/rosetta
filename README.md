@@ -16,3 +16,13 @@ your internal dns on your bind servers as well your external dns on DynDNS.
 ------------
 * NodeJS
 * MongoDB
+* Bower (to install client side libraries)
+* Grunt (for easier local dev)
+
+### Installation
+------------
+* git clone 
+* cd rosetta
+* bower install
+* npm install
+* node server.js (or grunt for development)

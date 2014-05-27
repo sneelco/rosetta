@@ -7,6 +7,7 @@ your internal dns on your bind servers as well your external dns on DynDNS.
 
 ### Planned Features
 ----------------
+* Builtin DNS Server written in node for transfers and nsupdates (in progress)
 * Support for Multiple DNS Providers (Bind and DynDNS to start)
 * Views
 * Role Based Access

@@ -21,7 +21,7 @@
         </div>
         <div class="trail">
             <ul>
-                <li ng-repeat="section in path"><a ui-sref="{{section.path}}">{{section.name}}</a><div class="arrow_right"></div></li>
+                <li ng-repeat="section in path"><a href="#{{section.path}}">{{section.name}}</a><div class="arrow_right"></div></li>
             </ul>
         </div>
         <div ui-view></div>

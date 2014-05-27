@@ -2,11 +2,10 @@
   "name": "package",
   "version": "0.0.1",
   "dependencies": {
-  	"angular": "1.2.0rc2",
+  	"angular": "1.0.8",
     "angular-ui-router": "0.2.0",
     "angular-grid": "2.0.7",
-    "angular-route": "1.2.0rc2",
-    "angular-resource": "1.2.0rc2",
+    "angular-resource": "1.0.8",
     "jquery": "1.10.2",
     "jquery-ui": "1.10.3",
     "requirejs": "2.1.8"

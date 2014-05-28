@@ -2,8 +2,7 @@ var dgram = require('dgram'),
   net = require('net'),
   udp_server = dgram.createSocket("udp4");
   tcp_server = net.createServer(),
-  handlers = require('./handlers'),
-  parsers = require('./parsers'),
+  request = require('./controllers/request'),
   zones = {};
 
 module.exports = {
@@ -22,7 +21,7 @@ module.exports = {
     udp_server.on('message', function (msg, client) {
 
       //Call the handler to get our response
-      response = handlers.request(msg, {
+      response = request.process(msg, {
         port: client.port,
         address: client.address
       });
@@ -42,7 +41,7 @@ module.exports = {
           var response;
 
           //Call the handler to get our response
-          response = handlers.request(data.slice(2,data.length), {
+          response = request.process(data.slice(2,data.length), {
             port: sock.remotePort,
             address: sock.remoteAddress
           });

@@ -32,8 +32,15 @@ zones = {
         data: 'ns1.scottneel.com.'
       },
       {
+        name: 'ns1',
+        type: 1,
+        class: 1,
+        ttl: 300,
+        data: '192.168.1.1'
+      },
+      {
         name: '',
-        type: 1, //NS
+        type: 1, //A
         class: 1,
         ttl: 300,
         data: '192.168.1.4'

@@ -40,6 +40,7 @@ var queryProcess = function (request, response, client) {
     request.questions.forEach(function(question) {
 
       if (question.type !== Types.toInt('AXFR')) {
+        console.log(question.type, Types.toInt('AXFR'))
         records = queryResolve(question.parts, question.type, question.class);
 
         if (question.type != Types.toInt('NS') && (records.length > 0)) {
@@ -50,7 +51,25 @@ var queryProcess = function (request, response, client) {
           add_records = queryResolve(auth_record.data.replace(/\.$/, '').split('.'), Types.toInt('A'), question.class);
         })
       } else {
+        zone = question.parts.join('.')
+        if (zones[zone]) {
+          zone_records = zones[zone].records
+          zone_records.forEach(function (record) {
+            if (record.type === Types.toInt('SOA')) {
+              record.question = zone;
+              record.zone = zone;
+              records.push(record);
+            }
+          })
+          zone_records.forEach(function (record) {
+            if (record.type !== Types.toInt('SOA')) {
+              record.zone = zone;
+              record.question = zone;
+              records.push(record);
+            }
+          })
 
+        }
       }
 
       if (records.length > 0) {
@@ -60,7 +79,7 @@ var queryProcess = function (request, response, client) {
         response.answers_rr = [];
 
         records.forEach(function (record) {
-          var name = (record.name === '') ? record.zone : host_lookup + '.' + record.zone;
+          var name = (record.name === '') ? record.zone : record.name + '.' + record.zone;
           response.answers_rr.push({
             parts: record.question.split('.'),
             type: record.type,
@@ -70,34 +89,36 @@ var queryProcess = function (request, response, client) {
           })
         });
 
-        //Process authority records
-        response.header.total_authority_rr = auth_records.length;
-        response.authority_rr = [];
+        if (question.type !== Types.toInt('AXFR')) {
+          //Process authority records
+          response.header.total_authority_rr = auth_records.length;
+          response.authority_rr = [];
 
-        auth_records.forEach(function (record) {
-          var name = record.zone;
-          response.authority_rr.push({
-            parts: record.question.split('.'),
-            type: record.type,
-            class: record.class,
-            ttl: record.ttl,
-            data: record.data
-          })
-        });
+          auth_records.forEach(function (record) {
+            var name = record.zone;
+            response.authority_rr.push({
+              parts: record.question.split('.'),
+              type: record.type,
+              class: record.class,
+              ttl: record.ttl,
+              data: record.data
+            })
+          });
 
-        //Process additional records
-        response.header.total_additional_rr = add_records.length;
-        response.additional_rr = [];
-        add_records.forEach(function (record) {
-          var name = record.zone;
-          response.additional_rr.push({
-            parts: record.question.split('.'),
-            type: record.type,
-            class: record.class,
-            ttl: record.ttl,
-            data: record.data
-          })
-        });
+          //Process additional records
+          response.header.total_additional_rr = add_records.length;
+          response.additional_rr = [];
+          add_records.forEach(function (record) {
+            var name = record.zone;
+            response.additional_rr.push({
+              parts: record.question.split('.'),
+              type: record.type,
+              class: record.class,
+              ttl: record.ttl,
+              data: record.data
+            })
+          });
+        }
 
         answer = 'NOERROR'
       } else {

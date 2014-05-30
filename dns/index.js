@@ -46,9 +46,12 @@ module.exports = {
             address: sock.remoteAddress
           });
 
+          tcp_response = new Buffer(2)
+          tcp_response.writeUInt16BE(response.length, 0)
+
           //Send the response
-          sock.write(response, function () {
-            sock.end();
+          sock.write(tcp_response, function () {
+            sock.end(response);
           });
 
         });

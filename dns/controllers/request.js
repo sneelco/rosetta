@@ -33,6 +33,7 @@ requestProcess = function (data, client) {
     },
     questions: request.questions
   }
+  //crypto.createHmac('md5', 'mykey').update('test2').digest('base64')
 
   switch (request.header.opcode) {
     case 0: //Query

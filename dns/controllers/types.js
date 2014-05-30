@@ -6,7 +6,9 @@ typesToInt = function (t) {
     A: 1,
     NS: 2,
     CNAME: 5,
-    SOA: 6
+    SOA: 6,
+    AXFR: 252,
+    TSIG: 250
   }
   return mapping[t];
 };
@@ -20,7 +22,8 @@ typesToStr = function (i) {
     15: 'MX',
     16: 'TXT',
     33: 'SRV',
-    252: 'AXFR'
+    252: 'AXFR',
+    250: 'TSIG'
 
   }
   return mapping[i] || i;
